@@ -3,12 +3,10 @@ import { AiFillEye, AiFillEyeInvisible, AiOutlineLoading3Quarters } from "react-
 import { useForm, SubmitHandler } from "react-hook-form";
 import Input from '../../common/input';
 import InputValidationError from '../../common/input-validation-error';
+import { IFormInput } from '../../interface/login-interface';
+import Button from '../../common/button';
 
-interface IFormInput {
-  email: string;
-  password: string;
-  rememberMe?: boolean;
-}
+
 
 const Login = () => {
   const [passwordVisible, setPasswordVisible] = useState(false);
@@ -95,20 +93,9 @@ const Login = () => {
           </div>
 
           <div className="w-full">
-            <button
-              type="submit"
-              disabled={isLoading}
-              className="w-full bg-blue-500 text-white py-2 px-4 font-medium rounded-lg hover:bg-blue-600 transition-all duration-500 ease-in-out"
-            >
-              {isLoading ? (
-                <div className="flex items-center justify-center">
-                  <AiOutlineLoading3Quarters className="animate-spin mx-2" size={24} />
-                  <span className="animate-wiggle text-sm">Wait...</span>
-                </div>
-              ) : (
-                "Log In"
-              )}
-            </button>
+            <Button type="submit" className='w-full' isLoading={isLoading}>
+              Log In
+            </Button>
           </div>
         </form>
       </div>
