@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { AiFillEye, AiFillEyeInvisible, AiOutlineLoading3Quarters } from "react-icons/ai";
 import { useForm, SubmitHandler } from "react-hook-form";
+import Input from '../../common/input';
+import InputValidationError from '../../common/input-validation-error';
 
 interface IFormInput {
   email: string;
@@ -10,21 +12,21 @@ interface IFormInput {
 
 const Login = () => {
   const [passwordVisible, setPasswordVisible] = useState(false);
-  const [isLoading, setIsLoading] = useState(false); // State to manage loading
+  const [isLoading, setIsLoading] = useState(false);
 
   const { register, handleSubmit, formState: { errors } } = useForm<IFormInput>();
 
   const togglePasswordVisibility = () => setPasswordVisible((prevState) => !prevState);
 
   const onSubmit: SubmitHandler<IFormInput> = (data) => {
-    setIsLoading(true); // Start loading
-    console.log("Form submitted", data);
+    setIsLoading(true);
 
-    // Simulate a 5-second delay
     setTimeout(() => {
-      setIsLoading(false); // Stop loading after 5 seconds
+      setIsLoading(false);
       console.log("Login successful");
     }, 5000);
+
+    console.log(data)
   };
 
   return (
@@ -38,37 +40,38 @@ const Login = () => {
 
         <form onSubmit={handleSubmit(onSubmit)}>
           <div className="mb-6">
-            <input
+            <Input<IFormInput>
+              name="email"
               type="email"
               placeholder="Enter your email"
-              {...register("email", { required: "Email is required." })}
-              className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+              register={register}
+              validation={{ required: "Email is required." }}
             />
-            {errors.email && (
-              <div className="text-red-500 text-sm mt-1">{errors.email.message}</div>
-            )}
+            <InputValidationError message={errors.email?.message} />
           </div>
 
           <div className="mb-4 relative">
-            <input
-              type={passwordVisible ? "text" : "password"}
-              placeholder="Enter your password"
-              {...register("password", { required: "Password is required." })}
-              className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-            />
-            <span
-              onClick={togglePasswordVisibility}
-              className="absolute right-4 top-1/2 transform -translate-y-1/2 cursor-pointer"
-            >
-              {passwordVisible ? (
-                <AiFillEyeInvisible className="text-gray-500" size={20} />
-              ) : (
-                <AiFillEye className="text-gray-500" size={20} />
-              )}
-            </span>
-            {errors.password && (
-              <div className="text-red-500 text-sm mt-1">{errors.password.message}</div>
-            )}
+            <div className="relative">
+              <Input<IFormInput>
+                name="password"
+                type={passwordVisible ? "text" : "password"}
+                placeholder="Enter your password"
+                register={register}
+                validation={{ required: "Password is required." }}
+                className="pr-10"
+              />
+              <span
+                onClick={togglePasswordVisibility}
+                className="absolute right-4 top-1/2 transform -translate-y-1/2 cursor-pointer"
+              >
+                {passwordVisible ? (
+                  <AiFillEyeInvisible className="text-gray-500" size={20} />
+                ) : (
+                  <AiFillEye className="text-gray-500" size={20} />
+                )}
+              </span>
+            </div>
+            <InputValidationError message={errors.password?.message} />
           </div>
 
           <div className="flex items-center justify-between mb-10">
@@ -94,7 +97,7 @@ const Login = () => {
           <div className="w-full">
             <button
               type="submit"
-              disabled={isLoading} // Disable button when loading
+              disabled={isLoading}
               className="w-full bg-blue-500 text-white py-2 px-4 font-medium rounded-lg hover:bg-blue-600 transition-all duration-500 ease-in-out"
             >
               {isLoading ? (
