@@ -5,26 +5,22 @@ import Input from '../../common/input';
 import InputValidationError from '../../common/input-validation-error';
 import { IFormInput } from '../../interface/login-interface';
 import Button from '../../common/button';
-
-
+import { useLoginMutation } from '../../apis/auth';
 
 const Login = () => {
   const [passwordVisible, setPasswordVisible] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
+
+  const { mutate: login, } = useLoginMutation();
 
   const { register, handleSubmit, formState: { errors } } = useForm<IFormInput>();
-
   const togglePasswordVisibility = () => setPasswordVisible((prevState) => !prevState);
 
   const onSubmit: SubmitHandler<IFormInput> = (data) => {
-    setIsLoading(true);
-
-    setTimeout(() => {
-      setIsLoading(false);
-      console.log("Login successful");
-    }, 5000);
-
-    console.log(data)
+    console.log(data);
+    login(data, {
+      onSuccess: (res) => { console.log(res) },
+      onError: (err) => { console.log(err) }
+    });
   };
 
   return (
@@ -74,7 +70,7 @@ const Login = () => {
 
           <div className="flex items-center justify-between mb-10">
             <div className="flex items-center">
-              <input
+              {/* <input
                 type="checkbox"
                 id="rememberMe"
                 {...register("rememberMe")}
@@ -82,7 +78,7 @@ const Login = () => {
               />
               <label htmlFor="rememberMe" className="ml-2 text-gray-700 text-sm">
                 Remember me
-              </label>
+              </label> */}
             </div>
             <a
               href="#"
@@ -93,7 +89,7 @@ const Login = () => {
           </div>
 
           <div className="w-full">
-            <Button type="submit" className='w-full' isLoading={isLoading}>
+            <Button type="submit" className='w-full'>
               Log In
             </Button>
           </div>
