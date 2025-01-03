@@ -4,23 +4,28 @@ import Dashboard from './pages/dashboard';
 import Users from './pages/users';
 import PublicRoutes from './pages/publicRoutes';
 import ProtectedRoutes from './pages/protextedRoutes';
+import Layout from './pages/layout';
+import Settings from './pages/settings';
+import Profiles from './pages/profiles';
 
 function App() {
   return (
-    <>
-      <BrowserRouter>
-        <Routes>
-          <Route element={<PublicRoutes />}>
-            <Route path="/" element={<Login />} />
-          </Route>
+    <BrowserRouter>
+      <Routes>
+        <Route element={<PublicRoutes />}>
+          <Route path="/" element={<Login />} />
+        </Route>
 
-          <Route element={<ProtectedRoutes />}>
-            <Route path="/dashboard" element={<Dashboard />} />
-            <Route path="/users" element={<Users />} />
+        <Route element={<ProtectedRoutes />}>
+          <Route path="/" element={<Layout />}>
+            <Route path="users" element={<Users />} />
+            <Route path="settings" element={<Settings />} />
+            <Route path="profiles" element={<Profiles />} />
+            <Route path="dashboard" element={<Dashboard />} />
           </Route>
-        </Routes>
-      </BrowserRouter>
-    </>
+        </Route>
+      </Routes>
+    </BrowserRouter>
   );
 }
 
