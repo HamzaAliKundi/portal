@@ -1,16 +1,19 @@
 import { useState } from "react";
-import { AiFillEye, AiFillEyeInvisible, AiOutlineLoading3Quarters } from "react-icons/ai";
+import { AiFillEye, AiFillEyeInvisible, } from "react-icons/ai";
 import { useForm, SubmitHandler } from "react-hook-form";
 import Input from '../../common/input';
 import InputValidationError from '../../common/input-validation-error';
-import { IFormInput } from '../../interface/login-interface';
+import { IFormInput } from '../../types/login-interface';
 import Button from '../../common/button';
 import { useLoginMutation } from '../../apis/auth';
+import { useNavigate } from 'react-router-dom';
 
 const Login = () => {
   const [passwordVisible, setPasswordVisible] = useState(false);
 
-  const { mutate: login, } = useLoginMutation();
+  const navigate = useNavigate();
+
+  const { mutate: login, isError, isPending } = useLoginMutation();
 
   const { register, handleSubmit, formState: { errors } } = useForm<IFormInput>();
   const togglePasswordVisibility = () => setPasswordVisible((prevState) => !prevState);
@@ -18,7 +21,7 @@ const Login = () => {
   const onSubmit: SubmitHandler<IFormInput> = (data) => {
     console.log(data);
     login(data, {
-      onSuccess: (res) => { console.log(res) },
+      onSuccess: (res) => { localStorage.setItem("token", res.token), navigate("/dashboard") },
       onError: (err) => { console.log(err) }
     });
   };
@@ -89,7 +92,7 @@ const Login = () => {
           </div>
 
           <div className="w-full">
-            <Button type="submit" className='w-full'>
+            <Button type="submit" className='w-full' isLoading={isPending}>
               Log In
             </Button>
           </div>

@@ -1,5 +1,5 @@
 {
-  "name": "my-project",
+  "name": "portal",
   "private": true,
   "version": "0.0.0",
   "scripts": {
@@ -10,7 +10,6 @@
   "dependencies": {
     "@tanstack/react-query": "^5.62.11",
     "axios": "^1.7.9",
-    "buffer": "^6.0.3",
     "react": "^18.0.0",
     "react-dom": "^18.0.0",
     "react-hook-form": "^7.54.2",
