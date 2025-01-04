@@ -2,7 +2,7 @@ import { useState } from "react";
 import { AiFillEye, AiFillEyeInvisible, } from "react-icons/ai";
 import { useForm, SubmitHandler } from "react-hook-form";
 import Input from '../../common/input';
-import InputValidationError from '../../common/input-validation-error';
+import InputValidationError from '../../common/inputValidationError';
 import { IFormInput } from '../../types/login-interface';
 import Button from '../../common/button';
 import { useLoginMutation } from '../../apis/auth';
@@ -10,6 +10,7 @@ import { useNavigate } from 'react-router-dom';
 
 const Login = () => {
   const [passwordVisible, setPasswordVisible] = useState(false);
+  const [invalidCredientals, setInvalidCredientals] = useState("")
 
   const navigate = useNavigate();
 
@@ -19,10 +20,9 @@ const Login = () => {
   const togglePasswordVisibility = () => setPasswordVisible((prevState) => !prevState);
 
   const onSubmit: SubmitHandler<IFormInput> = (data) => {
-    console.log(data);
     login(data, {
       onSuccess: (res) => { localStorage.setItem("token", res.token), navigate("/dashboard") },
-      onError: (err) => { console.log(err) }
+      onError: (err) => { setInvalidCredientals("Invalid Credientals") }
     });
   };
 
@@ -40,6 +40,7 @@ const Login = () => {
             <Input<IFormInput>
               name="email"
               type="email"
+              autoFocus={true}
               placeholder="Enter your email"
               register={register}
               validation={{ required: "Email is required." }}
@@ -68,6 +69,9 @@ const Login = () => {
                 )}
               </span>
             </div>
+            {invalidCredientals ? (
+              <span className="text-red-500 font-medium mt-1 ml-1">{invalidCredientals}</span>
+            ) : null}
             <InputValidationError message={errors.password?.message} />
           </div>
 
