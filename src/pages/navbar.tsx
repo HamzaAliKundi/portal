@@ -1,15 +1,21 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { LogOut } from "lucide-react";
+import Button from '../common/button';
 
 const Navbar = () => {
     const [isModalOpen, setIsModalOpen] = useState(false);
+    const [isLoading, setIsLoading] = useState(false);
     const navigate = useNavigate();
 
     const handleLogout = () => {
-        localStorage.removeItem("token");
-        setIsModalOpen(false);
-        navigate("/");
+        setIsLoading(true);
+        setTimeout(() => {
+            localStorage.removeItem("token");
+            setIsLoading(false);
+            setIsModalOpen(false);
+            navigate("/");
+        }, 2000);
     };
 
     return (
@@ -50,12 +56,13 @@ const Navbar = () => {
                             >
                                 Cancel
                             </button>
-                            <button
+                            <Button
                                 onClick={handleLogout}
-                                className="px-6 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-all duration-200"
+                                type='button'
+                                isLoading={isLoading}
                             >
                                 Logout
-                            </button>
+                            </Button>
                         </div>
                     </div>
                 </div>
