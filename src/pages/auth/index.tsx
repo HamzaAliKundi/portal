@@ -21,8 +21,13 @@ const Login = () => {
 
   const onSubmit: SubmitHandler<IFormInput> = (data) => {
     login(data, {
-      onSuccess: (res) => { localStorage.setItem("token", res.token), navigate("/dashboard") },
-      onError: (err) => { setInvalidCredientals("Invalid Credientals") }
+      onSuccess: (res) => {
+        localStorage.setItem("token", res?.access_token)
+        navigate("/dashboard")
+      },
+      onError: (err) => {
+        setInvalidCredientals("Invalid Credientals")
+      }
     });
   };
 

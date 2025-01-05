@@ -4,7 +4,7 @@ import { LoginCredentials, LoginResponse } from './types';
 
 const login = async (credentials: LoginCredentials) => {
     try {
-        const response = await axiosInstance.post("/login", credentials);
+        const response = await axiosInstance.post("/auth/signin", credentials);
         return response.data;
     } catch (error) {
         throw new Error("An unexpected error occurred");

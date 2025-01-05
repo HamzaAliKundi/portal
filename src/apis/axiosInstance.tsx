@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const axiosInstance = axios.create({
-    baseURL: 'https://reqres.in/api',
+    baseURL: 'https://agenda-cms-be-bc520f6f0563.herokuapp.com/api',
     timeout: 10000,
 });
 
