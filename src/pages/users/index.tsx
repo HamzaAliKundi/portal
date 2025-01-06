@@ -5,10 +5,12 @@ import "rsuite/dist/rsuite.css";
 import DeleteConfirmationModal from '../../common/deleteConfirmationModal';
 import UsersTable from '../../components/users';
 import LoadingTableSkeleton from '../../common/tableSkelteon';
+import SearchTableButton from '../../common/searchTableButton';
 
 const Users = () => {
     const [page, setPage] = useState(1);
     const [limit, setLimit] = useState(10);
+    const [searchQuery, setSearchQuery] = useState("");
     const [showModal, setShowModal] = useState<boolean>(false);
     const [itemIdToDelete, setItemIdToDelete] = useState<string | null>(null);
 
@@ -37,14 +39,26 @@ const Users = () => {
         setLimit(dataKey);
     };
 
+    const handleInputChange = (value: string) => {
+        setSearchQuery(value);
+        console.log("Search query updated:", value);
+    };
+
     return (
         <>
             <p className='text-[25px] font-semibold mb-6'>Users</p>
+            <div className="pb-6">
+                <SearchTableButton
+                    placeholder="Type to search..."
+                    onChange={handleInputChange}
+                    className="w-full max-w-md"
+                />
+            </div>
             {isLoading ? (
                 <LoadingTableSkeleton rowCount={7} columnCount={6} />
             ) : (
                 <>
-                    <div className='bg-white py-5'>
+                    <div className='bg-white shadow-md py-5'>
                         <UsersTable
                             data={users?.docs || []}
                             onEdit={handleEdit}
