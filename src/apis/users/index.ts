@@ -13,7 +13,7 @@ const fetchUsers = async (params: { page: number; limit: number; sort: string })
     }
 };
 
-export function useUsersQuery(page = 1, limit = 10, sort = "createdAt:desc") {
+export function useUsersQuery(page: number, limit: number, sort = "createdAt:desc") {
     return useQuery({
         queryKey: ['users', page, limit, sort],
         queryFn: () => fetchUsers({ page, limit, sort }),

@@ -1,6 +1,8 @@
 const Profiles = () => {
     return (
-        <div>Profile</div>
+        <>
+            Profiles
+        </>
     )
 }
 

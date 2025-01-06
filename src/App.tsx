@@ -9,6 +9,7 @@ import Settings from './pages/settings';
 import Profiles from './pages/profiles';
 import ForgotPassword from './pages/auth/forgotPassword';
 import SuccessPage from './pages/auth/sentMailSuccess';
+import ResetPassword from './pages/auth/resetPassword';
 
 function App() {
   return (
@@ -16,8 +17,9 @@ function App() {
       <Routes>
         <Route element={<PublicRoutes />}>
           <Route path="/" element={<Login />} />
-          <Route path="/forgot-password" element={<ForgotPassword />} />
           <Route path="/success" element={<SuccessPage />} />
+          <Route path="/reset-password" element={<ResetPassword />} />
+          <Route path="/forgot-password" element={<ForgotPassword />} />
         </Route>
 
         <Route element={<ProtectedRoutes />}>

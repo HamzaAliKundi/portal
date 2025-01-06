@@ -5,7 +5,7 @@ import { useForgotPasswordMutation } from '../../apis/auth';
 import InputValidationError from '../../common/inputValidationError';
 import Input from '../../common/input';
 import { SubmitHandler, useForm } from 'react-hook-form';
-import { IForgotPasswordEmail } from '../../types/login-interface';
+import { IForgotPasswordEmail } from '../../types/auth';
 
 const ForgotPassword = () => {
     const [error, setError] = useState<string>("");
@@ -19,14 +19,11 @@ const ForgotPassword = () => {
         forgotPassword(
             { email: data.email },
             {
-                onSuccess: (res: any) => { navigate("/success"); },
-                // @ts-ignore
-                onError: (error) => { setError(error?.message); },
+                onSuccess: () => { navigate("/success"); },
+                onError: (error: any) => { setError(error?.response?.data?.message); },
             }
         );
     };
-
-    console.log(error)
 
     return (
         <div className="min-h-screen flex items-center justify-center bg-gray-100">
@@ -63,6 +60,7 @@ const ForgotPassword = () => {
                             register={register}
                             validation={{ required: "Email is required." }}
                         />
+                        {error && <span className='text-red-500 text-sm mt-1'>{error}</span>}
                         <InputValidationError message={errors.email?.message} />
                     </div>
 

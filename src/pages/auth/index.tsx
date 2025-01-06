@@ -3,10 +3,10 @@ import { AiFillEye, AiFillEyeInvisible, } from "react-icons/ai";
 import { useForm, SubmitHandler } from "react-hook-form";
 import Input from '../../common/input';
 import InputValidationError from '../../common/inputValidationError';
-import { IFormInput } from '../../types/login-interface';
 import Button from '../../common/button';
 import { useLoginMutation } from '../../apis/auth';
 import { Link, useNavigate } from 'react-router-dom';
+import { ILoginForm } from '../../types/auth';
 
 const Login = () => {
   const [passwordVisible, setPasswordVisible] = useState(false);
@@ -16,17 +16,17 @@ const Login = () => {
 
   const { mutate: login, isError, isPending } = useLoginMutation();
 
-  const { register, handleSubmit, formState: { errors } } = useForm<IFormInput>();
+  const { register, handleSubmit, formState: { errors } } = useForm<ILoginForm>();
   const togglePasswordVisibility = () => setPasswordVisible((prevState) => !prevState);
 
-  const onSubmit: SubmitHandler<IFormInput> = (data) => {
+  const onSubmit: SubmitHandler<ILoginForm> = (data) => {
     login(data, {
       onSuccess: (res) => {
         localStorage.setItem("token", res?.access_token)
         navigate("/dashboard")
       },
-      onError: (err) => {
-        setInvalidCredientals("Invalid Credientals")
+      onError: (err: any) => {
+        setInvalidCredientals(err?.response?.data.message);
       }
     });
   };
@@ -44,7 +44,7 @@ const Login = () => {
 
         <form onSubmit={handleSubmit(onSubmit)}>
           <div className="mb-6">
-            <Input<IFormInput>
+            <Input<ILoginForm>
               name="email"
               label='Email Address'
               type="email"
@@ -58,7 +58,7 @@ const Login = () => {
 
           <div className="mb-4 relative">
             <div className="relative">
-              <Input<IFormInput>
+              <Input<ILoginForm>
                 name="password"
                 label='Password'
                 type={passwordVisible ? "text" : "password"}
@@ -69,7 +69,7 @@ const Login = () => {
               />
               <span
                 onClick={togglePasswordVisibility}
-                className="absolute right-4 top-1/2 transform -translate-y-1/2 cursor-pointer"
+                className="absolute right-4 top-10 transform -translate-y-1/2 cursor-pointer"
               >
                 {passwordVisible ? (
                   <AiFillEyeInvisible className="text-gray-500" size={20} />
@@ -90,7 +90,7 @@ const Login = () => {
                 type="checkbox"
                 id="rememberMe"
                 {...register("rememberMe")}
-                className="w-4 h-4 text-blue-500 bg-white border border-gray-400 rounded-sm focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all duration-300 ease-in-out"
+                className="w-4 h-4"
               />
               <label htmlFor="rememberMe" className="ml-2 text-gray-700 text-sm">
                 Remember me

@@ -1,6 +1,6 @@
 const SuccessPage = () => {
     return (
-        <div className="flex items-center justify-center min-h-screen bg-blue-50">
+        <div className="flex items-center justify-center min-h-screen bg-gray-100">
             <div className="bg-white mx-2 md:mx-0 lg:mx-0 shadow-md rounded-lg p-4 md:p-8 lg:p-8 max-w-md w-full text-center">
                 <div className="flex items-center justify-center mb-6">
                     <div className="h-10 w-10 bg-blue-500 rounded-full"></div>

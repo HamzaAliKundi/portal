@@ -3,14 +3,9 @@ import axiosInstance from '../axiosInstance';
 import { LoginCredentials, LoginResponse } from './types';
 
 const login = async (credentials: LoginCredentials) => {
-    try {
-        const response = await axiosInstance.post("/auth/signin", credentials);
-        return response.data;
-    } catch (error) {
-        throw new Error("An unexpected error occurred");
-    }
+    const response = await axiosInstance.post("/auth/signin", credentials);
+    return response.data;
 };
-
 export function useLoginMutation() {
     return useMutation<any, Error, LoginCredentials>({
         mutationFn: login,
@@ -18,16 +13,11 @@ export function useLoginMutation() {
 }
 
 const forgotPassword = async (data: { email: string }): Promise<{ message: string }> => {
-    try {
-        const response = await axiosInstance.post<{ message: string }>("/auth/forgot-password", data);
-        return response.data;
-    } catch (error) {
-        throw new Error("An unexpected error occurred");
-    }
+    const response = await axiosInstance.post<{ message: string }>("/auth/forgot-password", data);
+    return response.data;
 };
-
 export function useForgotPasswordMutation() {
-    return useMutation<{ message: string }, unknown, { email: string }>({
+    return useMutation<{ message: string }, Error, { email: string }>({
         mutationFn: forgotPassword,
     });
 }
