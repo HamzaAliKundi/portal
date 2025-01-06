@@ -3,3 +3,7 @@ export interface IFormInput {
     password: string;
     rememberMe?: boolean;
 }
+
+export interface IForgotPasswordEmail {
+    email: string
+}

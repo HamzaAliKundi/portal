@@ -8,7 +8,8 @@ interface InputProps<T extends FieldValues> {
   register: UseFormRegister<T>;
   validation?: RegisterOptions<T>;
   className?: string;
-  autoFocus?: boolean
+  autoFocus?: boolean;
+  label?: string;
 }
 
 const Input = <T extends FieldValues>({
@@ -18,16 +19,21 @@ const Input = <T extends FieldValues>({
   register,
   validation,
   className = "",
-  autoFocus
+  autoFocus,
+  label
 }: InputProps<T>) => {
   return (
-    <input
-      type={type}
-      autoFocus={autoFocus}
-      placeholder={placeholder}
-      {...register(name, validation)}
-      className={`w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 ${className}`}
-    />
+    <>
+      {label && <label htmlFor={name} className="block text-sm font-semibold text-gray-700">{label}</label>}
+      <input
+        type={type}
+        id={name}
+        autoFocus={autoFocus}
+        placeholder={placeholder}
+        {...register(name, validation)}
+        className={`w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 ${className}`}
+      />
+    </>
   );
 };
 

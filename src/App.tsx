@@ -7,6 +7,8 @@ import ProtectedRoutes from './pages/protextedRoutes';
 import Layout from './pages/layout';
 import Settings from './pages/settings';
 import Profiles from './pages/profiles';
+import ForgotPassword from './pages/auth/forgotPassword';
+import SuccessPage from './pages/auth/sentMailSuccess';
 
 function App() {
   return (
@@ -14,6 +16,8 @@ function App() {
       <Routes>
         <Route element={<PublicRoutes />}>
           <Route path="/" element={<Login />} />
+          <Route path="/forgot-password" element={<ForgotPassword />} />
+          <Route path="/success" element={<SuccessPage />} />
         </Route>
 
         <Route element={<ProtectedRoutes />}>

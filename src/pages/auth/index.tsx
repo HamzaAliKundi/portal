@@ -6,7 +6,7 @@ import InputValidationError from '../../common/inputValidationError';
 import { IFormInput } from '../../types/login-interface';
 import Button from '../../common/button';
 import { useLoginMutation } from '../../apis/auth';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 const Login = () => {
   const [passwordVisible, setPasswordVisible] = useState(false);
@@ -35,15 +35,18 @@ const Login = () => {
     <div className="flex min-h-screen items-center justify-center bg-gray-100">
       <div className="w-full mx-2 lg:mx-0 max-w-lg bg-white rounded-lg shadow-sm py-10 px-4 lg:py-16 lg:px-12">
         <div className="flex justify-center mb-12">
-          <div className="h-16 w-16 bg-blue-500 rounded-full flex items-center justify-center">
-            <span className="text-white text-3xl font-bold">🔒</span>
-          </div>
+          <img
+            src="https://w7.pngwing.com/pngs/175/27/png-transparent-uniform-logo-brand-web-page-industry-navbar-text-trademark-logo-thumbnail.png"
+            alt="Logo"
+            className="h-16 w-auto"
+          />
         </div>
 
         <form onSubmit={handleSubmit(onSubmit)}>
           <div className="mb-6">
             <Input<IFormInput>
               name="email"
+              label='Email Address'
               type="email"
               autoFocus={true}
               placeholder="Enter your email"
@@ -57,6 +60,7 @@ const Login = () => {
             <div className="relative">
               <Input<IFormInput>
                 name="password"
+                label='Password'
                 type={passwordVisible ? "text" : "password"}
                 placeholder="Enter your password"
                 register={register}
@@ -82,7 +86,7 @@ const Login = () => {
 
           <div className="flex items-center justify-between mb-10">
             <div className="flex items-center">
-              {/* <input
+              <input
                 type="checkbox"
                 id="rememberMe"
                 {...register("rememberMe")}
@@ -90,14 +94,14 @@ const Login = () => {
               />
               <label htmlFor="rememberMe" className="ml-2 text-gray-700 text-sm">
                 Remember me
-              </label> */}
+              </label>
             </div>
-            <a
-              href="#"
+            <Link
+              to="/forgot-password"
               className="text-sm text-blue-500 hover:underline focus:outline-none focus:ring-2 focus:ring-blue-500"
             >
               Forgot password?
-            </a>
+            </Link>
           </div>
 
           <div className="w-full">

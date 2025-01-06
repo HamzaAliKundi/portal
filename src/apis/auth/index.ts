@@ -16,3 +16,18 @@ export function useLoginMutation() {
         mutationFn: login,
     })
 }
+
+const forgotPassword = async (data: { email: string }): Promise<{ message: string }> => {
+    try {
+        const response = await axiosInstance.post<{ message: string }>("/auth/forgot-password", data);
+        return response.data;
+    } catch (error) {
+        throw new Error("An unexpected error occurred");
+    }
+};
+
+export function useForgotPasswordMutation() {
+    return useMutation<{ message: string }, unknown, { email: string }>({
+        mutationFn: forgotPassword,
+    });
+}
