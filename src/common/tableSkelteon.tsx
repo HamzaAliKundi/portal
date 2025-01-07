@@ -25,7 +25,7 @@ const LoadingTableSkeleton: React.FC<SkeletonTableProps> = ({ rowCount, columnCo
     };
 
     return (
-        <div className="flex justify-center items-center shadow-md" style={{ height: '500px' }}>
+        <div className="flex justify-center items-center shadow-md" style={{ height: '560px' }}>
             <div className="w-full max-w-7xl space-y-4">
                 {renderSkeletonRows()}
             </div>

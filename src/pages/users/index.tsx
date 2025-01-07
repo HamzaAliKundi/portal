@@ -1,24 +1,31 @@
 import { useEffect, useState } from 'react';
-import { useUsersQuery } from '../../apis/users';
-import { Pagination, Loader } from 'rsuite';
-import "rsuite/dist/rsuite.css";
+import { useDeleteUserMutation, useUsersQuery } from '../../apis/users';
+import { Pagination } from 'rsuite';
+import { useDebounce } from 'use-debounce';
 import DeleteConfirmationModal from '../../common/deleteConfirmationModal';
 import UsersTable from '../../components/users';
 import LoadingTableSkeleton from '../../common/tableSkelteon';
 import SearchTableButton from '../../common/searchTableButton';
+import { toast } from 'react-hot-toast';
+import "rsuite/dist/rsuite.css";
 
 const Users = () => {
-    const [page, setPage] = useState(1);
-    const [limit, setLimit] = useState(10);
-    const [searchQuery, setSearchQuery] = useState("");
+    const [page, setPage] = useState<number>(1);
+    const [limit, setLimit] = useState<number>(10);
+    const [searchValue, setSearchValue] = useState<string>("");
     const [showModal, setShowModal] = useState<boolean>(false);
     const [totalDocs, setTotalDocs] = useState<number>(0)
+    const [debouncedSearchValue] = useDebounce(searchValue, 300);
     const [itemIdToDelete, setItemIdToDelete] = useState<string | null>(null);
 
-    const { data: users, isError, isLoading } = useUsersQuery(page, limit, "createdAt:desc");
+    const { data: users, isError, isLoading, } = useUsersQuery(page, limit, "createdAt:desc", debouncedSearchValue);
+    const { mutate: deleteUser, isPending: isLoadingDeletingUser } = useDeleteUserMutation();
+
     useEffect(() => {
-        setTotalDocs(users?.totalDocs)
-    }, []);
+        if (users?.totalDocs !== undefined) setTotalDocs(users.totalDocs);
+    }, [users]);
+
+    const handleInputChange = (value: string) => setSearchValue(value);
 
     const getSequentialNumber = (index: number) => {
         return (page - 1) * limit + index + 1;
@@ -32,8 +39,16 @@ const Users = () => {
     };
 
     const confirmDelete = (id: string) => {
-        console.log('Deleted item with ID:', id);
-        setShowModal(false);
+        deleteUser(id, {
+            onSuccess: () => {
+                toast.success('User Deleted!');
+                setShowModal(false);
+            },
+            onError: (error) => {
+                toast.error('Error while deleting User!');
+            },
+        });
+
     };
 
     const closeModal = () => setShowModal(false);
@@ -41,11 +56,6 @@ const Users = () => {
     const handleChangeLimit = (dataKey: any) => {
         setPage(1);
         setLimit(dataKey);
-    };
-
-    const handleInputChange = (value: string) => {
-        setSearchQuery(value);
-        console.log("Search query updated:", value);
     };
 
     return (
@@ -98,6 +108,7 @@ const Users = () => {
                 onClose={closeModal}
                 onConfirm={confirmDelete}
                 itemId={itemIdToDelete}
+                isLoading={isLoadingDeletingUser}
             />
         </>
     );

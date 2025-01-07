@@ -1,12 +1,14 @@
+import Button from './button';
 
 interface ConfirmationModalProps {
     showModal: boolean;
     onClose: () => void;
     onConfirm: (id: string) => void;
     itemId: string | null;
+    isLoading?: boolean;
 }
 
-const DeleteConfirmationModal: React.FC<ConfirmationModalProps> = ({ showModal, onClose, onConfirm, itemId }) => {
+const DeleteConfirmationModal: React.FC<ConfirmationModalProps> = ({ showModal, onClose, onConfirm, itemId, isLoading }) => {
     if (!showModal) return null;
 
     return (
@@ -20,12 +22,13 @@ const DeleteConfirmationModal: React.FC<ConfirmationModalProps> = ({ showModal, 
                     >
                         Cancel
                     </button>
-                    <button
-                        className="bg-red-600 text-white px-4 py-2 rounded"
+                    <Button
+                        type="button"
+                        isLoading={isLoading}
                         onClick={() => itemId && onConfirm(itemId)}
                     >
                         Confirm
-                    </button>
+                    </Button>
                 </div>
             </div>
         </div>

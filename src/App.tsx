@@ -10,10 +10,12 @@ import Profiles from './pages/profiles';
 import ForgotPassword from './pages/auth/forgotPassword';
 import SuccessPage from './pages/auth/sentMailSuccess';
 import ResetPassword from './pages/auth/resetPassword';
+import { Toaster } from 'react-hot-toast';
 
 function App() {
   return (
     <BrowserRouter>
+      <Toaster position="top-center" reverseOrder={false} />
       <Routes>
         <Route element={<PublicRoutes />}>
           <Route path="/" element={<Login />} />
