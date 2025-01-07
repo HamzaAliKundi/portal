@@ -1,21 +1,13 @@
-# Welcome to the Vite + React + Tailwind CSS Starter!
+# Welcome to the web poratl!
 
 ## To install dependencies
 
-`npm install` or `yarn install`
+`yarn`
 
 ## To run the project locally
 
-`npm run dev` or `yarn dev`
+`yarn start:docker` for running through docker
+or
+`yarn run dev` for normal running
 
 ## To deploy to Vercel
-
-Download the [Vercel CLI](https://vercel.com/docs/cli) and run `vercel` from the root directory of this repository
-
-You can also link your GitHub repository on [Vercel's site](https://vercel.com)
-
-### 🟢 A live version of the deployment is available [here](https://vite-tailwind-starter-two.vercel.app/)
-
-## To deploy to [Fleek](https://fleek.co/) on IPFS
-
-☝️ Coming soon
