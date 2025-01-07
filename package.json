@@ -3,9 +3,10 @@
   "private": true,
   "version": "0.0.0",
   "scripts": {
-    "dev": "vite",
+    "dev": "vite --host 0.0.0.0",
     "build": "tsc && vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "start:docker": "docker-compose up -d && docker-compose logs -f"
   },
   "dependencies": {
     "@tanstack/react-query": "^5.62.11",

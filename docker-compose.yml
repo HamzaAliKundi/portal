@@ -1,13 +1,13 @@
-version: '3.8'
+version: "3.9"
+
 services:
-  app:
+  web:
     build:
       context: .
-    volumes:
-      - .:/app
-      - /app/node_modules
     ports:
-      - "5173:3000"
+      - "5173:5173"
+    volumes:
+      - ./:/app
+      - /app/node_modules
     stdin_open: true
     tty: true
-    command: yarn dev --host

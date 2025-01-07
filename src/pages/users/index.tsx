@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useUsersQuery } from '../../apis/users';
 import { Pagination, Loader } from 'rsuite';
 import "rsuite/dist/rsuite.css";
@@ -12,9 +12,15 @@ const Users = () => {
     const [limit, setLimit] = useState(10);
     const [searchQuery, setSearchQuery] = useState("");
     const [showModal, setShowModal] = useState<boolean>(false);
+    const [totalDocs, setTotalDocs] = useState<number>(0)
     const [itemIdToDelete, setItemIdToDelete] = useState<string | null>(null);
 
     const { data: users, isError, isLoading } = useUsersQuery(page, limit, "createdAt:desc");
+    useEffect(() => {
+        setTotalDocs(users?.totalDocs)
+    }, []);
+
+    console.log("test console.log()")
 
     const getSequentialNumber = (index: number) => {
         return (page - 1) * limit + index + 1;
@@ -80,7 +86,7 @@ const Users = () => {
                     maxButtons={10}
                     size="md"
                     layout={['total', '-', 'limit', '|', 'pager', 'skip']}
-                    total={users?.totalDocs || 0}
+                    total={totalDocs || 0}
                     limitOptions={[10, 30, 50]}
                     limit={limit}
                     activePage={page}

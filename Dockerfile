@@ -1,20 +1,20 @@
-# Use a base Node.js image
+# Use a lightweight Node.js image
 FROM node:20-alpine
 
 # Set the working directory inside the container
 WORKDIR /app
 
-# Copy only package.json and yarn.lock for efficient caching
+# Copy package.json and yarn.lock for dependency installation
 COPY package.json yarn.lock ./
 
 # Install dependencies
-RUN yarn install
+RUN yarn
 
-# Copy the rest of the application code
+# Copy the rest of the application files
 COPY . .
 
-# Expose the Vite development port
+# Expose the port for the Vite development server
 EXPOSE 5173
 
-# Command to start the development server
-CMD ["yarn", "dev", "--host"]
+# Start the development server
+CMD ["yarn", "dev"]
