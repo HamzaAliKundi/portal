@@ -9,5 +9,3 @@
 `yarn start:docker` for running through docker
 or
 `yarn run dev` for normal running
-
-## To deploy to Vercel
