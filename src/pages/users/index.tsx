@@ -20,8 +20,6 @@ const Users = () => {
         setTotalDocs(users?.totalDocs)
     }, []);
 
-    console.log("test console.log()")
-
     const getSequentialNumber = (index: number) => {
         return (page - 1) * limit + index + 1;
     };
