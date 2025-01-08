@@ -8,6 +8,7 @@ import LoadingTableSkeleton from '../../common/tableSkelteon';
 import SearchTableButton from '../../common/searchTableButton';
 import { toast } from 'react-hot-toast';
 import "rsuite/dist/rsuite.css";
+import Button from '../../common/button';
 
 const Users = () => {
     const [page, setPage] = useState<number>(1);
@@ -61,12 +62,13 @@ const Users = () => {
     return (
         <>
             <p className='text-[25px] font-semibold mb-6'>Users</p>
-            <div className="pb-6">
+            <div className="pb-6 w-full flex flex-wrap gap-3 justify-between">
                 <SearchTableButton
                     placeholder="Type to search..."
                     onChange={handleInputChange}
                     className="w-full max-w-md"
                 />
+                <Button type='button' className='px-6'>+ Add</Button>
             </div>
             {isLoading ? (
                 <LoadingTableSkeleton rowCount={7} columnCount={6} />
