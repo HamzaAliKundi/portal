@@ -39,11 +39,19 @@ const Layout = () => {
                       }`
                     }
                   >
-                    <link.icon className="!mr-3 !no-underline !h-5 !w-5 !text-gray-500" />
-                    {link.name}
+                    {({ isActive }) => (
+                      <>
+                        <link.icon
+                          className={`!mr-3 !no-underline !h-5 !w-5 transition-colors ${isActive ? "!text-blue-500" : "!text-gray-500"
+                            }`}
+                        />
+                        {link.name}
+                      </>
+                    )}
                   </NavLink>
                 </li>
               ))}
+
             </ul>
           </nav>
           <button
