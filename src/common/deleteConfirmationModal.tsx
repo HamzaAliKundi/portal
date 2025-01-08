@@ -12,7 +12,7 @@ const DeleteConfirmationModal: React.FC<ConfirmationModalProps> = ({ showModal, 
     if (!showModal) return null;
 
     return (
-        <div className="fixed inset-0 bg-gray-600 bg-opacity-50 flex justify-center items-center">
+        <div className="fixed inset-0 bg-gray-600 bg-opacity-50 flex justify-center items-center z-30">
             <div className="bg-white p-6 rounded shadow-lg">
                 <h3 className="text-xl mb-4">Are you sure you want to delete this item?</h3>
                 <div className="flex justify-end">
@@ -32,6 +32,7 @@ const DeleteConfirmationModal: React.FC<ConfirmationModalProps> = ({ showModal, 
                 </div>
             </div>
         </div>
+
     );
 };
 
