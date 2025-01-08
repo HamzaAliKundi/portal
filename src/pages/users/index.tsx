@@ -94,8 +94,9 @@ const Users = () => {
                     ellipsis
                     boundaryLinks
                     maxButtons={10}
-                    size="md"
-                    layout={['total', '-', 'limit', '|', 'pager', 'skip']}
+                    className={`${window.innerWidth >= 768 ? 'pagination-md' : 'pagination-sm'
+                        }`}
+                    layout={['-', 'limit', '|', 'pager', 'skip']}
                     total={totalDocs || 0}
                     limitOptions={[10, 30, 50]}
                     limit={limit}
