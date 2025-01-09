@@ -9,6 +9,7 @@ import SearchTableButton from '../../common/searchTableButton';
 import { toast } from 'react-hot-toast';
 import "rsuite/dist/rsuite.css";
 import Button from '../../common/button';
+import { useNavigate } from 'react-router-dom';
 
 const Users = () => {
     const [page, setPage] = useState<number>(1);
@@ -22,6 +23,8 @@ const Users = () => {
     const { data: users, isLoading, } = useUsersQuery(page, limit, "createdAt:desc", debouncedSearchValue);
     const { mutate: deleteUser, isPending: isLoadingDeletingUser } = useDeleteUserMutation();
 
+    const navigate = useNavigate();
+
     useEffect(() => {
         if (users?.totalDocs !== undefined) setTotalDocs(users.totalDocs);
     }, [users]);
@@ -32,7 +35,7 @@ const Users = () => {
         return (page - 1) * limit + index + 1;
     };
 
-    const handleEdit = (id: string) => { console.log('Editing row with id:', id); };
+    const handleEdit = (id: string) => { navigate(`/users/edit/${id}`) };
 
     const handleDelete = (id: string) => {
         setItemIdToDelete(id);
@@ -68,7 +71,7 @@ const Users = () => {
                     onChange={handleInputChange}
                     className="w-full max-w-md"
                 />
-                <Button type='button' className='px-6'>+ Add</Button>
+                <Button type='button' className='px-6' onClick={() => navigate("/users/add")}>+ Add</Button>
             </div>
             {isLoading ? (
                 <LoadingTableSkeleton rowCount={7} columnCount={6} />

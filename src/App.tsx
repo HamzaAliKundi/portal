@@ -11,6 +11,8 @@ import ForgotPassword from './pages/auth/forgotPassword';
 import SuccessPage from './pages/auth/sentMailSuccess';
 import ResetPassword from './pages/auth/resetPassword';
 import { Toaster } from 'react-hot-toast';
+import EditUser from './components/users/editUser';
+import AddUser from './components/users/addUser';
 
 function App() {
   return (
@@ -26,10 +28,19 @@ function App() {
 
         <Route element={<ProtectedRoutes />}>
           <Route path="/" element={<Layout />}>
-            <Route path="users" element={<Users />} />
-            <Route path="settings" element={<Settings />} />
-            <Route path="profiles" element={<Profiles />} />
+            {/* Dashbaord Route */}
             <Route path="dashboard" element={<Dashboard />} />
+
+            {/* Users Route */}
+            <Route path="users" element={<Users />} />
+            <Route path="users/add" element={<AddUser />} />
+            <Route path="users/edit/:id" element={<EditUser />} />
+
+            {/* Settings Route */}
+            <Route path="settings" element={<Settings />} />
+
+            {/* Profiles Route */}
+            <Route path="profiles" element={<Profiles />} />
           </Route>
         </Route>
       </Routes>
