@@ -19,7 +19,7 @@ const Users = () => {
     const [debouncedSearchValue] = useDebounce(searchValue, 300);
     const [itemIdToDelete, setItemIdToDelete] = useState<string | null>(null);
 
-    const { data: users, isError, isLoading, } = useUsersQuery(page, limit, "createdAt:desc", debouncedSearchValue);
+    const { data: users, isLoading, } = useUsersQuery(page, limit, "createdAt:desc", debouncedSearchValue);
     const { mutate: deleteUser, isPending: isLoadingDeletingUser } = useDeleteUserMutation();
 
     useEffect(() => {
