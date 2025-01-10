@@ -88,7 +88,7 @@ const Users = () => {
                 </>
             )}
 
-            <div style={{ padding: 20 }}>
+            <div style={{ padding: 20 }} className='flex justify-end'>
                 <Pagination
                     prev
                     next
@@ -99,7 +99,7 @@ const Users = () => {
                     maxButtons={10}
                     className={`${window.innerWidth >= 768 ? 'pagination-md' : 'pagination-sm'
                         }`}
-                    layout={['-', 'limit', '|', 'pager', 'skip']}
+                    layout={['limit', 'pager', 'skip']}
                     total={totalDocs || 0}
                     limitOptions={[10, 30, 50]}
                     limit={limit}
