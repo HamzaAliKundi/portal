@@ -1,5 +1,10 @@
 import React from "react";
-import { UseFormRegister, FieldValues, RegisterOptions, Path } from "react-hook-form";
+import {
+  UseFormRegister,
+  FieldValues,
+  RegisterOptions,
+  Path,
+} from "react-hook-form";
 
 interface InputProps<T extends FieldValues> {
   name: Path<T>;
@@ -20,11 +25,18 @@ const Input = <T extends FieldValues>({
   validation,
   className = "",
   autoFocus,
-  label
+  label,
 }: InputProps<T>) => {
   return (
     <>
-      {label && <label htmlFor={name} className="block text-sm font-semibold text-gray-700">{label}</label>}
+      {label && (
+        <label
+          htmlFor={name}
+          className="block text-sm font-semibold text-gray-700"
+        >
+          {label}
+        </label>
+      )}
       <input
         type={type}
         id={name}

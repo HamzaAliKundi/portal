@@ -1,33 +1,38 @@
 import { useState } from "react";
-import { AiFillEye, AiFillEyeInvisible, } from "react-icons/ai";
+import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai";
 import { useForm, SubmitHandler } from "react-hook-form";
-import Input from '../../common/input';
-import InputValidationError from '../../common/inputValidationError';
-import Button from '../../common/button';
-import { useLoginMutation } from '../../apis/auth';
-import { Link, useNavigate } from 'react-router-dom';
-import { ILoginForm } from '../../types/auth';
+import Input from "../../common/input";
+import InputValidationError from "../../common/inputValidationError";
+import Button from "../../common/button";
+import { useLoginMutation } from "../../apis/auth";
+import { Link, useNavigate } from "react-router-dom";
+import { ILoginForm } from "../../types/auth";
 
 const Login = () => {
   const [passwordVisible, setPasswordVisible] = useState(false);
-  const [invalidCredientals, setInvalidCredientals] = useState("")
+  const [invalidCredientals, setInvalidCredientals] = useState("");
 
   const navigate = useNavigate();
 
   const { mutate: login, isError, isPending } = useLoginMutation();
 
-  const { register, handleSubmit, formState: { errors } } = useForm<ILoginForm>();
-  const togglePasswordVisibility = () => setPasswordVisible((prevState) => !prevState);
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<ILoginForm>();
+  const togglePasswordVisibility = () =>
+    setPasswordVisible((prevState) => !prevState);
 
   const onSubmit: SubmitHandler<ILoginForm> = (data) => {
     login(data, {
       onSuccess: (res) => {
-        localStorage.setItem("token", res?.access_token)
-        navigate("/dashboard")
+        localStorage.setItem("token", res?.access_token);
+        navigate("/dashboard");
       },
       onError: (err: any) => {
         setInvalidCredientals(err?.response?.data.message);
-      }
+      },
     });
   };
 
@@ -46,7 +51,7 @@ const Login = () => {
           <div className="mb-6">
             <Input<ILoginForm>
               name="email"
-              label='Email Address'
+              label="Email Address"
               type="email"
               autoFocus={true}
               placeholder="Enter your email"
@@ -60,7 +65,7 @@ const Login = () => {
             <div className="relative">
               <Input<ILoginForm>
                 name="password"
-                label='Password'
+                label="Password"
                 type={passwordVisible ? "text" : "password"}
                 placeholder="Enter your password"
                 register={register}
@@ -79,7 +84,9 @@ const Login = () => {
               </span>
             </div>
             {invalidCredientals ? (
-              <span className="text-red-500 font-medium mt-1 ml-1">{invalidCredientals}</span>
+              <span className="text-red-500 font-medium mt-1 ml-1">
+                {invalidCredientals}
+              </span>
             ) : null}
             <InputValidationError message={errors.password?.message} />
           </div>
@@ -92,7 +99,10 @@ const Login = () => {
                 {...register("rememberMe")}
                 className="w-4 h-4"
               />
-              <label htmlFor="rememberMe" className="ml-2 text-gray-700 text-sm">
+              <label
+                htmlFor="rememberMe"
+                className="ml-2 text-gray-700 text-sm"
+              >
                 Remember me
               </label>
             </div>
@@ -105,7 +115,7 @@ const Login = () => {
           </div>
 
           <div className="w-full">
-            <Button type="submit" className='w-full' isLoading={isPending}>
+            <Button type="submit" className="w-full" isLoading={isPending}>
               Log In
             </Button>
           </div>
