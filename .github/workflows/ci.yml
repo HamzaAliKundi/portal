@@ -1,4 +1,3 @@
-
 name: Portal Depoyment
 
 on:
@@ -20,7 +19,7 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: '23.3.0'
+          node-version: "23.3.0"
 
       - name: Install dependencies
         run: yarn
