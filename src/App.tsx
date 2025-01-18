@@ -13,6 +13,8 @@ import ResetPassword from "./pages/auth/resetPassword";
 import { Toaster } from "react-hot-toast";
 import EditUser from "./components/users/editUser";
 import AddUser from "./components/users/addUser";
+import Reports from "./pages/reports/dailyReports";
+import Analytics from "./pages/reports/analytics";
 
 function App() {
   return (
@@ -33,6 +35,9 @@ function App() {
             <Route path="users" element={<Users />} />
             <Route path="users/add" element={<AddUser />} />
             <Route path="users/edit/:id" element={<EditUser />} />
+
+            <Route path="/reports/daily" element={<Reports />} />
+            <Route path="/reports/analytics" element={<Analytics />} />
 
             <Route path="settings" element={<Settings />} />
 
