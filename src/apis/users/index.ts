@@ -3,6 +3,7 @@ import axiosInstance from "../axiosInstance";
 import queryClient from "./../queryClient";
 
 const USERS_QUERY_KEY = "users" as const;
+const CURRENT_USER_QUERY_KEY = "currentUser" as const;
 
 const fetchUsers = async (params: {
   page: number;
@@ -16,6 +17,7 @@ const fetchUsers = async (params: {
   });
   return response.data;
 };
+
 export function useUsersQuery(
   page: number,
   limit: number,
@@ -26,6 +28,17 @@ export function useUsersQuery(
   return useQuery({
     queryKey: [USERS_QUERY_KEY, params],
     queryFn: () => fetchUsers(params),
+  });
+}
+
+const fetchCurrentUser = async () => {
+  const response = await axiosInstance.get('/user/current-user/info');
+  return response.data;
+};
+export function useCurrentUserQuery() {
+  return useQuery({
+    queryKey: [CURRENT_USER_QUERY_KEY],
+    queryFn: fetchCurrentUser
   });
 }
 

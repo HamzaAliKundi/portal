@@ -1,12 +1,14 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { LogOut } from "lucide-react";
+import { LogOut, User } from "lucide-react";
 import Button from "../common/button";
+import { useCurrentUserQuery } from "../apis/users";
 
 const Navbar = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
+  const { data: currentUser } = useCurrentUserQuery();
 
   const handleLogout = () => {
     setIsLoading(true);
@@ -31,6 +33,12 @@ const Navbar = () => {
       </div>
 
       <div className="flex items-center space-x-4">
+        <div className="flex items-center mr-4">
+          <User className="h-5 w-5 text-gray-700 mr-2" />
+          <span className="text-gray-700 font-semibold">
+            {currentUser?.name || 'User'}
+          </span>
+        </div>
         <span
           onClick={() => setIsModalOpen(true)}
           className="flex items-center text-gray-700 hover:text-blue-500 cursor-pointer"
