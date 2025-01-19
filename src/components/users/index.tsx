@@ -16,15 +16,17 @@ const UsersTable: React.FC<UsersTableProps> = ({
   onDelete,
   getSequentialNumber,
 }) => {
+  const isSmallScreen = window.innerWidth < 768;
+
   return (
     <>
       <Table height={525} data={data}>
-        <Column width={200} align="center" fixed>
+        <Column width={isSmallScreen ? 80 : 200} align="center" fixed>
           <HeaderCell className="font-bold">ID</HeaderCell>
           <Cell>{(_, index) => getSequentialNumber(index ?? 0)}</Cell>
         </Column>
 
-        <Column width={200} fixed>
+        <Column width={isSmallScreen ? 120 : 200} fixed>
           <HeaderCell className="font-bold">First Name</HeaderCell>
           <Cell dataKey="name" />
         </Column>
