@@ -6,15 +6,14 @@ import PublicRoutes from "./pages/publicRoutes";
 import ProtectedRoutes from "./pages/protextedRoutes";
 import Layout from "./pages/layout";
 import Settings from "./pages/settings";
-import Profiles from "./pages/profiles";
 import ForgotPassword from "./pages/auth/forgotPassword";
 import SuccessPage from "./pages/auth/sentMailSuccess";
 import ResetPassword from "./pages/auth/resetPassword";
-import { Toaster } from "react-hot-toast";
 import EditUser from "./components/users/editUser";
 import AddUser from "./components/users/addUser";
 import Reports from "./pages/reports/dailyReports";
 import Analytics from "./pages/reports/analytics";
+import { Toaster } from "react-hot-toast";
 
 function App() {
   return (
@@ -40,8 +39,6 @@ function App() {
             <Route path="/reports/analytics" element={<Analytics />} />
 
             <Route path="settings" element={<Settings />} />
-
-            <Route path="profiles" element={<Profiles />} />
           </Route>
         </Route>
       </Routes>

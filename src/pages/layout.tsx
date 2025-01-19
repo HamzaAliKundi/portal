@@ -1,16 +1,8 @@
 import { useState } from "react";
-import { NavLink, Outlet } from "react-router-dom";
-import { Home, User, Users, Settings } from "lucide-react";
+import {  Outlet } from "react-router-dom";
 import Navbar from "./navbar";
 import { Menu, X } from "lucide-react";
 import SideNav from "./sideNav";
-
-const links = [
-  { name: "Dashboard", path: "/dashboard", icon: Home },
-  { name: "Users", path: "/users", icon: Users },
-  { name: "Profiles", path: "/profiles", icon: User },
-  { name: "Settings", path: "/settings", icon: Settings },
-];
 
 const Layout = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
