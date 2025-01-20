@@ -19,7 +19,7 @@ const DeleteConfirmationModal: React.FC<ConfirmationModalProps> = ({
 
   return (
     <div className="fixed inset-0 bg-gray-600 bg-opacity-50 flex justify-center items-center z-30">
-      <div className="bg-white p-6 rounded shadow-lg">
+      <div className="bg-white p-6 rounded shadow-lg mx-4 md:mx-auto w-full md:w-auto">
         <h3 className="text-xl mb-4">
           Are you sure you want to delete this item?
         </h3>

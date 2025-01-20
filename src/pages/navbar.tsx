@@ -51,7 +51,7 @@ const Navbar = () => {
       {isModalOpen && (
         <div className="fixed inset-0 bg-gray-900 bg-opacity-50 flex items-center justify-center z-50">
           <div
-            className={`bg-white w-96 rounded-lg shadow-lg p-6 text-center transform transition-transform duration-300 ${
+            className={`bg-white w-96 mx-4 rounded-lg shadow-lg p-6 text-center transform transition-transform duration-300 ${
               isModalOpen ? "scale-100 opacity-100" : "scale-90 opacity-0"
             }`}
           >
