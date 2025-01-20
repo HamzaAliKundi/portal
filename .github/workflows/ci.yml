@@ -46,5 +46,6 @@ jobs:
             git pull origin main
             npm i
             npm run build
+            cd ..
             pm2 restart portal
           EOF
