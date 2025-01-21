@@ -25,7 +25,7 @@ const Layout = () => {
         >
           <button
             onClick={toggleSidebar}
-            className="absolute top-16 left-1 z-30 text-gray-600 md:hidden"
+            className="absolute top-[74px] left-1 z-30 text-gray-600 md:hidden"
           >
             <Menu className="h-5 w-5" />
           </button>
