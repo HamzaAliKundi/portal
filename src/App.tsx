@@ -13,6 +13,7 @@ import EditUser from "./components/users/editUser";
 import AddUser from "./components/users/addUser";
 import Reports from "./pages/reports/dailyReports";
 import Analytics from "./pages/reports/analytics";
+import Profile from "./pages/profile/profile";
 import { Toaster } from "react-hot-toast";
 
 function App() {
@@ -29,6 +30,8 @@ function App() {
 
         <Route element={<ProtectedRoutes />}>
           <Route path="/" element={<Layout />}>
+            <Route path="profile" element={<Profile />} />
+            
             <Route path="dashboard" element={<Dashboard />} />
 
             <Route path="users" element={<Users />} />
