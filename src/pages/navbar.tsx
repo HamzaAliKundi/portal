@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { LogOut, User } from "lucide-react";
 import Button from "../common/button";
 import { useCurrentUserQuery } from "../apis/users";
+import logo from "/logo.png";
 
 const Navbar = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -25,9 +26,9 @@ const Navbar = () => {
       <div className="flex items-center space-x-4">
         <Link to="/" className="flex items-center text-gray-700">
           <img
-            src="https://w7.pngwing.com/pngs/175/27/png-transparent-uniform-logo-brand-web-page-industry-navbar-text-trademark-logo-thumbnail.png"
+            src={logo}
             alt="Logo"
-            className="h-8 w-auto"
+            className="h-10 w-auto"
           />
         </Link>
       </div>

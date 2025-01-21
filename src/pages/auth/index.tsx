@@ -7,6 +7,7 @@ import Button from "../../common/button";
 import { useLoginMutation } from "../../apis/auth";
 import { Link, useNavigate } from "react-router-dom";
 import { ILoginForm } from "../../types/auth";
+import logo from "/logo.png";
 
 const Login = () => {
   const [passwordVisible, setPasswordVisible] = useState(false);
@@ -14,7 +15,7 @@ const Login = () => {
 
   const navigate = useNavigate();
 
-  const { mutate: login, isError, isPending } = useLoginMutation();
+  const { mutate: login, isPending } = useLoginMutation();
 
   const {
     register,
@@ -39,11 +40,11 @@ const Login = () => {
   return (
     <div className="flex min-h-screen items-center justify-center bg-gray-100">
       <div className="w-full mx-2 lg:mx-0 max-w-lg bg-white rounded-lg shadow-sm py-10 px-4 lg:py-16 lg:px-12">
-        <div className="flex justify-center mb-12">
+        <div className="flex justify-center mb-8">
           <img
-            src="https://w7.pngwing.com/pngs/175/27/png-transparent-uniform-logo-brand-web-page-industry-navbar-text-trademark-logo-thumbnail.png"
+            src={logo}
             alt="Logo"
-            className="h-16 w-auto"
+            className="h-24 w-auto"
           />
         </div>
 
