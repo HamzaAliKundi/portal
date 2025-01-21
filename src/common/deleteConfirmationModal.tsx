@@ -6,6 +6,7 @@ interface ConfirmationModalProps {
   onConfirm: (id: string) => void;
   itemId: string | null;
   isLoading?: boolean;
+  message: string;
 }
 
 const DeleteConfirmationModal: React.FC<ConfirmationModalProps> = ({
@@ -14,6 +15,7 @@ const DeleteConfirmationModal: React.FC<ConfirmationModalProps> = ({
   onConfirm,
   itemId,
   isLoading,
+  message
 }) => {
   if (!showModal) return null;
 
@@ -21,10 +23,10 @@ const DeleteConfirmationModal: React.FC<ConfirmationModalProps> = ({
     <div className="fixed inset-0 bg-gray-600 bg-opacity-50 flex justify-center items-center z-30">
       <div className="bg-white p-6 rounded shadow-lg mx-4 md:mx-auto w-full md:w-auto">
         <h3 className="text-xl mb-4">
-          Are you sure you want to delete this item?
+          {message}
         </h3>
-        <div className="flex justify-end">
-          <button className="mr-2 text-gray-600" onClick={onClose}>
+        <div className="flex justify-end space-x-2">
+          <button className="px-6 py-2 bg-gray-200 text-gray-700 rounded-lg hover:bg-gray-300 transition-all duration-200" onClick={onClose}>
             Cancel
           </button>
           <Button

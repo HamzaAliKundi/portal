@@ -124,6 +124,7 @@ const Users = () => {
       </div>
 
       <DeleteConfirmationModal
+        message={"Are you sure you want to delete this User?"}
         showModal={showModal}
         onClose={closeModal}
         onConfirm={confirmDelete}
