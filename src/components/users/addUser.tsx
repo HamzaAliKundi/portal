@@ -19,7 +19,7 @@ const AddUser = () => {
   };
 
   return (
-    <div className="p-6">
+    <div className="sm:p-0 md:p-6 lg:p-6">
       <BreadCrumbs
         breadcrumbItems={[
           { name: "Users", link: "/users" },
