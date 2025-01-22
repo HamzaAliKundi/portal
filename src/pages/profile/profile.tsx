@@ -9,7 +9,7 @@ const Profile = () => {
 
   return (
     <>
-        <h1 className="text-2xl font-bold text-gray-800 mb-6">User Info</h1>
+        <h1 className="text-2xl font-bold text-gray-800 mb-6">Your Personal Infomation</h1>
     </>
   );
 };
