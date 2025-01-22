@@ -26,3 +26,14 @@ export function useForgotPasswordMutation() {
     mutationFn: forgotPassword,
   });
 }
+
+const changePassword = async (data: { oldPassword: string; newPassword: string }) => {
+  const response = await axiosInstance.patch("/user/change-password", data);
+  return response.data;
+};
+
+export function useChangePasswordMutation() {
+  return useMutation<any, Error, { oldPassword: string; newPassword: string }>({
+    mutationFn: changePassword,
+  });
+}
